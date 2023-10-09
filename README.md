@@ -22,7 +22,6 @@ A list of such statistics include:
 - Faceoffs Taken
 - Faceoffs Won
 - Faceoff Win %
-- Turnover Differential
 - Shootout Attempts
 - Shootout Goals
 - Shootout Goals %
@@ -48,7 +47,7 @@ A list of such statistics include:
 
 As a result, this application is designed to be used by a hockey team to both record and visualize stats for their players.
 After statistics have been added by the user for each player, the user can choose to display a table to show 
-the players' statistics. The user has the choice to show either player or goalie stats.
+the players' statistics. The user has the choice to show either skater or goalie stats.
 Furthermore, users can easily sort players by a metric of their choice.
 
 I chose this project because I really enjoy data analysis and how it can be applied to  sports statistics.
@@ -59,17 +58,17 @@ in the field of data analysis and data science.
 ## User Stories
 **Add an X to a Y** 
 - I want to be able to select a player and update that player's statistics
-- I want to be able to select a team and add a new player to that team
+- I want to be able to select a team and add or remove a player
 
 **View a list of items**
 - I want to be able to select some or all of the stats for my team and view a table for those specific player/goalie
 stats
-- I want to be able to select and view either player stats or goalie stats
+- I want to be able to select and view either skater stats or goalie stats
 
 **Other**
-- I want to be able to select a team and remove a player
+- I want to be able to know many skaters and how many goalies are on a team 
 - I want to be able to select a quantitative statistic and view it so that it is sorted in either ascending or descending order
 - I want to be able to select a player and automatically calculate a percentage statistic by dividing the total number
 of attempts by the number of successful attempts
-  - For example, if I input the number of Faceoffs Taken and the number of Faceoffs won for a player, I want to
+  - For example, if I input the number of Faceoffs Taken and the number of Faceoffs won for a skater, I want to
   calculate and store the Faceoff %
