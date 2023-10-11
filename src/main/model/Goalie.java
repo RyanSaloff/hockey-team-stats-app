@@ -3,7 +3,7 @@ package model;
 // Represents a Goalie (G) that has a name, age, and position.
 // Implements the setter and getter methods from Player
 public class Goalie implements Player {
-    private String name;
+    private String name; // add comments
     private int age;
     private String position;
     private int number;

@@ -8,12 +8,6 @@ public class Skater implements Player {
     private String position;
     private int number;
 
-
-
-    public Skater(String skaterName, int skaterAge, String skaterPosition, int skaterNumber) {
-
-    }
-
     // MODIFIES: this
     // EFFECTS: updates the skater's name
     @Override
