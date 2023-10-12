@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Team {
     private int skaters;             // number of skaters on a team
@@ -29,13 +30,13 @@ public class Team {
         return this.name;
     }
 
-    // REQUIRES: there are no goalies or skaters with the same jersey number on a team
     // MODIFIES: this
     // EFFECTS: if goalie is already in the team's list of goalies, returns false. otherwise adds a goalie to the end
     //          of the team's list of goalie and also adds one to the goalie count
     public boolean addGoalie(Goalie goalie) {
         for (Goalie nextGoalie : goalieList) {
-            if (nextGoalie == goalie) {
+            if (nextGoalie == goalie || nextGoalie.getNumber() == goalie.getNumber()
+                    || Objects.equals(nextGoalie.getName(), goalie.getName())) {
                 return false;
             }
         }
@@ -52,13 +53,13 @@ public class Team {
         return this.goalies;
     }
 
-    // REQUIRES: there are no skaters or goalies with the same jersey number on a team
     // MODIFIES: this
     // EFFECTS: if skater is already in the team's list of skaters, returns false. otherwise adds a skater to the end
     //          of the team's list of skaters and also adds one to the skater count
     public boolean addSkater(Skater skater) {
         for (Skater nextSkater : skaterList) {
-            if (nextSkater == skater) {
+            if (nextSkater == skater || nextSkater.getNumber() == skater.getNumber()
+                    || Objects.equals(nextSkater.getName(), skater.getName())) {
                 return false;
             }
         }
@@ -98,7 +99,7 @@ public class Team {
         return false;
     }
 
-    // 1 <= jerseyNumber <= 99
+    // REQUIRES: 1 <= jerseyNumber <= 99
     // MODIFIES: this
     // EFFECTS: if the jersey number matches with a skater, removes skater from the list and returns true.
     //          otherwise returns false
@@ -112,9 +113,11 @@ public class Team {
         }
         return false;
     }
-
-
-
-
-
 }
+
+
+
+
+
+
+

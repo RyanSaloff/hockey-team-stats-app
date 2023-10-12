@@ -57,18 +57,40 @@ in the field of data analysis and data science.
 
 ## User Stories
 **Add an X to a Y** 
-- I want to be able to select a player and update that player's statistics
-- I want to be able to select a team and add or remove a player
+- **DONE** ~~I want to be able to select a player and update that player's information~~ 
+- **DONE** ~~I want to be able to add or remove a player from a team~~
 
 **View a list of items**
 - I want to be able to select some or all of the stats for my team and view a table for those specific player/goalie
 stats
-- I want to be able to select and view either skater stats or goalie stats
+- **DONE** ~~I want to be able to select and view either the skaters' or the goalies' information~~  
 
 **Other**
-- I want to be able to know many skaters and how many goalies are on a team 
-- I want to be able to select a quantitative statistic and view it so that it is sorted in either ascending or descending order
+- **DONE** ~~I want to be able to know many skaters and how many goalies are on a team~~ 
+- I want to be able to select a quantitative statistic and view it so that it is sorted in either ascending or
+descending order
 - I want to be able to select a player and automatically calculate a percentage statistic by dividing the total number
 of attempts by the number of successful attempts
   - For example, if I input the number of Faceoffs Taken and the number of Faceoffs won for a skater, I want to
   calculate and store the Faceoff %
+
+## Phase 1 Update
+In this phase, I created an application to create a team of hockey players. Each player is either a Goalie or a Skater.
+Additionally, each player on a team has a name, a unique jersey number, an age, and a position. Positions include:
+
+- "G" - Goalie
+- "D" - Defenseman
+- "C" - Center
+- "RW" - Right Wing
+- "LW" - Left Wing
+
+Currently, this application has the following options: 
+- Set a new team name
+- View either the team's list of goalies and players
+- Return the number of players on a team
+- Add a player to a team
+- Remove a play from a team
+- Update a player's information on a team
+
+Now that players and goalies can be added to a team, the next stage will involve saving teams and creating
+tables for the team's statistics.
