@@ -145,6 +145,22 @@ public class TeamTest {
         assertEquals(testTeam.playerCount(), 2);
     }
 
+    // Tests the case where two different goalies have matching numbers (fails to add)
+    @Test
+    void addGoalieMatchingNumber() {
+        testTeam.addGoalie(testGoalieA);
+        testGoalieB.setNumber(35);
+        assertFalse(testTeam.addGoalie(testGoalieB));
+    }
+
+    // Tests the case where two different goalies have matching numbers (fails to add)
+    @Test
+    void addPlayerMatchingNumber() {
+        testTeam.addSkater(testSkaterA);
+        testSkaterB.setNumber(11);
+        assertFalse(testTeam.addSkater(testSkaterB));
+    }
+
     // Tests the case where removeGoalie is called on an empty list of goalies
     @Test
     void removeGoalieEmptyList() {

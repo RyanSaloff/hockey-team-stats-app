@@ -35,8 +35,7 @@ public class Team {
     //          of the team's list of goalie and also adds one to the goalie count
     public boolean addGoalie(Goalie goalie) {
         for (Goalie nextGoalie : goalieList) {
-            if (nextGoalie == goalie || nextGoalie.getNumber() == goalie.getNumber()
-                    || Objects.equals(nextGoalie.getName(), goalie.getName())) {
+            if (nextGoalie == goalie || nextGoalie.getNumber() == goalie.getNumber()) {
                 return false;
             }
         }
@@ -58,8 +57,7 @@ public class Team {
     //          of the team's list of skaters and also adds one to the skater count
     public boolean addSkater(Skater skater) {
         for (Skater nextSkater : skaterList) {
-            if (nextSkater == skater || nextSkater.getNumber() == skater.getNumber()
-                    || Objects.equals(nextSkater.getName(), skater.getName())) {
+            if (nextSkater == skater || nextSkater.getNumber() == skater.getNumber()) {
                 return false;
             }
         }
