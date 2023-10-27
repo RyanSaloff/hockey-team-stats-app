@@ -58,7 +58,7 @@ in the field of data analysis and data science.
 ## User Stories
 **Add an X to a Y** 
 - **DONE** ~~I want to be able to select a player and update that player's information~~ 
-- **DONE** ~~I want to be able to add or remove a player from a team~~
+- **DONE** ~~I want to be able to add a player from my team~~
 
 **View a list of items**
 - I want to be able to select some or all of the stats for my team and view a table for those specific player/goalie
@@ -67,6 +67,9 @@ stats
 
 **Other**
 - **DONE** ~~I want to be able to know many skaters and how many goalies are on a team~~ 
+- **DONE** ~~I want to be able to add a player from my team~~
+- **DONE** ~~I want to be able to save my team if I choose~~
+- **DONE** ~~I want to be able to load my team~~
 - I want to be able to select a quantitative statistic and view it so that it is sorted in either ascending or
 descending order
 - I want to be able to select a player and automatically calculate a percentage statistic by dividing the total number
@@ -94,3 +97,6 @@ Currently, this application has the following options:
 
 Now that players and goalies can be added to a team, the next stage will involve saving teams and creating
 tables for the team's statistics.
+
+## Phase 2 Update
+In this phase, I added the capability to save and load a team. Both users stories were added above.

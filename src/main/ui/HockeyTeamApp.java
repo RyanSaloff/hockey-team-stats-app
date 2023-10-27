@@ -274,7 +274,7 @@ public class HockeyTeamApp {
         skaters = team.getSkaterCount();
         if (players == 1) {
             System.out.println("There is 1 player on the Calgary Flames, including " + goalies + " goalie(s) and "
-                    + skaters + " (s).");
+                    + skaters + " skater(s).");
         } else {
             System.out.println("There are " + players + " players on the Calgary Flames, including " + goalies
                             + " goalie(s) and "  + skaters + " skater(s).");
