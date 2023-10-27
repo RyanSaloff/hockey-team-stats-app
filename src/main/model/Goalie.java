@@ -1,9 +1,12 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a Goalie (G) that has a name, age, and position.
 // Implements the setter and getter methods from Player
-public class Goalie implements Player {
-    private String name; // add comments
+public class Goalie implements Player, Writable {
+    private String name;
     private int age;
     private String position;
     private int number;
@@ -57,5 +60,15 @@ public class Goalie implements Player {
     @Override
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("age", age);
+        json.put("position", position);
+        json.put("number", number);
+        return json;
     }
 }

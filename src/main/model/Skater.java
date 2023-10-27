@@ -1,8 +1,11 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a Skater (RW, C, LW, D) that has a name, age, and position.
 // Implements the getter methods from Player
-public class Skater implements Player {
+public class Skater implements Player, Writable {
     private String name;
     private int age;
     private String position;
@@ -57,5 +60,15 @@ public class Skater implements Player {
     @Override
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("age", age);
+        json.put("position", position);
+        json.put("number", number);
+        return json;
     }
 }

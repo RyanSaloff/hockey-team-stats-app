@@ -4,7 +4,11 @@ package ui;
 import model.Goalie;
 import model.Skater;
 import model.Team;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,11 +18,16 @@ import java.util.Scanner;
 
 // Hockey team roster application
 public class HockeyTeamApp {
+    private static final String JSON_STORE = "./data/team.json";
     private Team team;       // reference to a team
     private Scanner input;   // stores user input
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the hockey team roster application
     public HockeyTeamApp() {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runHockeyTeam();
     }
 
@@ -52,7 +61,9 @@ public class HockeyTeamApp {
     // EFFECTS: displays options for the user
     private void displayOptions() {
         System.out.println("\n" + team.getName());
-        System.out.println("\ts -> set new team name");
+        System.out.println("\tl -> load team from file");
+        System.out.println("\ts -> save current team to file");
+        System.out.println("\tc -> change team name");
         System.out.println("\tv -> view the list of players");
         System.out.println("\tn -> show the number of players");
         System.out.println("\ta -> add a player");
@@ -65,27 +76,47 @@ public class HockeyTeamApp {
     // EFFECTS: processes user command
     private void processCommand(String command) {
         switch (command) {
-            case "s":
-                doSet();
+            case "l": loadTeam();
+            break;
+            case "s": saveTeam();
                 break;
-            case "v":
-                doViewPlayers();
+            case "c": doChangeName();
                 break;
-            case "n":
-                doPlayerCount();
+            case "v": doViewPlayers();
                 break;
-            case "a":
-                doAddPlayer();
+            case "n": doPlayerCount();
                 break;
-            case "r":
-                doRemovePlayer();
+            case "a": doAddPlayer();
                 break;
-            case "u":
-                doUpdatePlayer();
+            case "r": doRemovePlayer();
                 break;
-            default:
-                System.out.println("Invalid input");
+            case "u": doUpdatePlayer();
                 break;
+            default: System.out.println("Invalid input");
+                break;
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads team from file
+    private void loadTeam() {
+        try {
+            team = jsonReader.read();
+            System.out.println("Loaded " + team.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    // EFFECTS: saves the team to file
+    private void saveTeam() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(team);
+            jsonWriter.close();
+            System.out.println("Saved " + team.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
         }
     }
 
@@ -285,7 +316,7 @@ public class HockeyTeamApp {
 
     // MODIFIES: this
     // EFFECTS: sets the new team name
-    private void doSet() {
+    private void doChangeName() {
         System.out.print("Current team name: " + team.getName() + ". Enter new team name:");
         String name = input.next();
         team.setName(name);

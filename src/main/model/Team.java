@@ -1,10 +1,15 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Team {
+// Represents a hockey team with a list of Players, list of Goalies, and a team name
+public class Team implements Writable {
     private int skaters;             // number of skaters on a team
     private int goalies;             // number of goalies on a team
     private int players;             // number of players (goalies + skaters) on a team
@@ -110,6 +115,35 @@ public class Team {
             }
         }
         return false;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("goalieList", goaliesToJson());
+        json.put("skaterList", skatersToJson());
+        return json;
+    }
+
+    // EFFECTS: returns goalies on this team as a JSON array
+    private JSONArray goaliesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Goalie g : goalieList) {
+            jsonArray.put(g.toJson());
+        }
+        return jsonArray;
+    }
+
+    // EFFECTS: returns skaters on this team as a JSON array
+    private JSONArray skatersToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Skater s : skaterList) {
+            jsonArray.put(s.toJson());
+        }
+        return jsonArray;
     }
 }
 
