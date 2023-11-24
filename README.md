@@ -58,24 +58,17 @@ in the field of data analysis and data science.
 ## User Stories
 **Add an X to a Y** 
 - **DONE** ~~I want to be able to select a player and update that player's information~~ 
-- **DONE** ~~I want to be able to add a player from my team~~
+- **DONE** ~~I want to be able to add a skater/goalie to my team~~
 
 **View a list of items**
-- I want to be able to select some or all of the stats for my team and view a table for those specific player/goalie
-stats
-- **DONE** ~~I want to be able to select and view either the skaters' or the goalies' information~~  
+- **DONE** ~~I want to be able to select and view either the skaters' or the goalies' information in a table~~  
 
 **Other**
-- **DONE** ~~I want to be able to know many skaters and how many goalies are on a team~~ 
-- **DONE** ~~I want to be able to add a player from my team~~
+- **DONE** ~~I want to be able to edit my team's name~~
+- **DONE** ~~I want to be able to remove a skater/goalie from my team~~
 - **DONE** ~~I want to be able to save my team if I choose~~
 - **DONE** ~~I want to be able to load my team~~
-- I want to be able to select a quantitative statistic and view it so that it is sorted in either ascending or
-descending order
-- I want to be able to select a player and automatically calculate a percentage statistic by dividing the total number
-of attempts by the number of successful attempts
-  - For example, if I input the number of Faceoffs Taken and the number of Faceoffs won for a skater, I want to
-  calculate and store the Faceoff %
+
 
 ## Phase 1 Update
 In this phase, I created an application to create a team of hockey players. Each player is either a Goalie or a Skater.
@@ -95,8 +88,43 @@ Currently, this application has the following options:
 - Remove a play from a team
 - Update a player's information on a team
 
-Now that players and goalies can be added to a team, the next stage will involve saving teams and creating
-tables for the team's statistics.
+Now that players and goalies can be added to a team, the next stage will involve saving and loading teams.
 
 ## Phase 2 Update
 In this phase, I added the capability to save and load a team. Both users stories were added above.
+
+The next stage will be to add tables for the team's statistics.
+
+## Phase 3 Update
+### Instructions for Grader
+- You can add multiple Players to a Team by pressing the "Add Skater/Goalie" button 
+- You can switch between viewing Goalies and Skaters by pressing the "Goalie" or "Skater" tab at the top left of the
+application
+- You can update the team's name by pressing Team Settings > Edit Team Name in the menu at the top left of the
+application
+
+
+- You can generate the first required action related to the user story "adding multiple Players to a Team" by pressing 
+the "Remove Goalie/Skater" button to remove a skater/goalie from the table
+- You can generate the second required action related to the user story "adding multiple Players to a Team" by pressing
+the "Update Goalie/Skater" to modify the name, number, age, or position of any player on a team
+- You can locate my visual component at the top left of the application. The Goalie tab has a picture of the Calgary
+Flames Goaltender Mikka Kippursoff, while the Skater tab has a picture of the Pittsburgh Penguins Skater Sidney Crosby.
+This helps the user identify if they are viewing the Goalie table or the Skater table.
+- You can save the state of my application by pressing Team Settings > Save Team in the menu at the top left of the
+application
+- You can reload the state of my application by pressing Team Settings > Load Team in the menu at the top left of the
+application
+
+
+Here is some images showing what the application looks like:
+
+![img.png](img.png)
+This image shows the Goalies tab when the application is opened and no goalies have been added.
+
+![img_1.png](img_1.png)
+This image shows the Skaters tab when three skaters have been added.
+
+![img_2.png](img_2.png)
+
+This image shows the drop-down menu and the top left of the application.

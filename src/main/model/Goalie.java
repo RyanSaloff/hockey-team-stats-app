@@ -54,7 +54,7 @@ public class Goalie implements Player, Writable {
         return number;
     }
 
-    // add specification
+    // EFFECTS: generates a JSON representation of the current instance of Goalie
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);

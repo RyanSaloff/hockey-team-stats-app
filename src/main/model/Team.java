@@ -117,6 +117,7 @@ public class Team implements Writable {
         return false;
     }
 
+    // EFFECTS: generates a JSON representation of the current instance of Team
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

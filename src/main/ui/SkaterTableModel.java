@@ -5,10 +5,13 @@ import model.Skater;
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
+// Represents a Table Model that creates a table with skaterList as the data for the table and uses columnNames for the
+// column names.
 public class SkaterTableModel extends AbstractTableModel {
     private List<Skater> skaterList;
     private String[] columnNames = {"Name", "Jersey Number", "Age", "Position"};
 
+    // EFFECTS: sets the data as the skaterList
     public SkaterTableModel(List<Skater> skaterList) {
         this.skaterList = skaterList;
     }
@@ -44,11 +47,9 @@ public class SkaterTableModel extends AbstractTableModel {
         return columnNames[columnIndex];
     }
 
-    public void addSkater() {
-        fireTableDataChanged();
-    }
-
-    public void removeSkater() {
+    // MODIFIES: this
+    // EFFECTS: updates the cell values in each row
+    public void updateSkater() {
         fireTableDataChanged();
     }
 }

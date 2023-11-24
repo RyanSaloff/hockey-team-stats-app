@@ -5,10 +5,13 @@ import model.Goalie;
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
+// Represents a Table Model that creates a table with goalieList as the data for the table and uses columnNames for the
+// column names.
 public class GoalieTableModel extends AbstractTableModel {
     private List<Goalie> goalieList;
     private String[] columnNames = {"Name", "Jersey Number", "Age", "Position"};
 
+    // EFFECTS: sets the data as the skaterList
     public GoalieTableModel(List<Goalie> goalieList) {
         this.goalieList = goalieList;
     }
@@ -44,11 +47,9 @@ public class GoalieTableModel extends AbstractTableModel {
         return columnNames[columnIndex];
     }
 
-    public void addGoalie() {
-        fireTableDataChanged();
-    }
-
-    public void removeGoalie() {
+    // MODIFIES: this
+    // EFFECTS: updates the cell values in each row
+    public void updateGoalie() {
         fireTableDataChanged();
     }
 }

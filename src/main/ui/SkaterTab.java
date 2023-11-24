@@ -8,15 +8,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+// Represents a tab that contains a team's skater panel. The skater tab has one TableModel that is added to the centre
+// of the screen.
 public class SkaterTab extends JPanel {
     List<Skater> skaterList;
     SkaterTableModel skaterTableModel;
-    String teamName;
 
-    public SkaterTab(List<Skater> skaterList, String teamName) {
+    // EFFECTS: adds the button panel and table to the tab. passes skaterList to the TableModel as the data
+    public SkaterTab(List<Skater> skaterList) {
         this.skaterList = skaterList;
         this.skaterTableModel = new SkaterTableModel(skaterList);
-        this.teamName = teamName;
 
         setLayout(new BorderLayout());
         JTable skaterTable = new JTable(skaterTableModel);
@@ -26,6 +27,9 @@ public class SkaterTab extends JPanel {
         addButtonPanel();
     }
 
+    // MODIFIES: buttonPanel
+    // EFFECTS: creates a buttonPanel with 4 rows and 1 column. 4 buttons are added including an image of a skater,
+    //          a button to add a skater, a button to remove a skater, and a button to update an existing skater's info
     private void addButtonPanel() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(4,1));
@@ -39,8 +43,9 @@ public class SkaterTab extends JPanel {
         setVisible(true);
     }
 
-    // MODIFIES: this
-    // EFFECTS:
+    // MODIFIES: this, updateButton
+    // EFFECTS: creates updateButton which updates a skater's information if a matching jersey number is found
+    //          and returns updateButton. else creates and returns updateButton
     private JButton updateButton() {
         JButton updateButton = new JButton();
         updateButton.setLabel("Update Skater");
@@ -55,6 +60,9 @@ public class SkaterTab extends JPanel {
         return updateButton;
     }
 
+    // MODIFIES: this
+    // EFFECTS: checks the list of skaters for a matching jerseyNumber. if there is a matching jerseyNumber, prompts
+    //          the user to update the skater's information in the list. else does nothing
     private void updateSkaterHelper(int jerseyNumber) {
         for (Skater nextSkater : skaterList) {
             if (nextSkater.getNumber() == jerseyNumber) {
@@ -66,7 +74,7 @@ public class SkaterTab extends JPanel {
                 nextSkater.setNumber(number);
                 nextSkater.setAge(age);
                 nextSkater.setPosition(position);
-                skaterTableModel.addSkater();
+                skaterTableModel.updateSkater();
                 JOptionPane.showMessageDialog(null, name + " has been updated!");
                 return;
             }
@@ -75,12 +83,16 @@ public class SkaterTab extends JPanel {
                 + " " + jerseyNumber + " not found.");
     }
 
+    // MODIFIES: skaterButton
+    // EFFECTS: creates skaterButton which displays a picture of a hockey skater
     private JButton skaterImage() {
         ImageIcon image = new ImageIcon("images/skater.png");
         JButton skaterButton = new JButton(image);
         return skaterButton;
     }
 
+    // MODIFIES: this, addButton
+    // EFFECTS: creates addButton which will add a skater to the team when clicked
     private JButton addButton() {
         JButton addButton = new JButton();
         addButton.setLabel("Add Skater");
@@ -94,13 +106,9 @@ public class SkaterTab extends JPanel {
         return addButton;
     }
 
-    public void addSkaters(List<Skater> skaters) {
-        for (Skater nextSkater : skaters) {
-            skaterList.add(nextSkater);
-            skaterTableModel.addSkater();
-        }
-    }
-
+    // MODIFIES: this
+    // EFFECTS: prompts the user for the name, number, age, and position of a skater. adds the skater if there is no
+    //          skater with a matching number and returns true. else does nothing and returns false
     private boolean addSkater() {
         String name = JOptionPane.showInputDialog("Enter skater's name:");
         int number = Integer.parseInt(JOptionPane.showInputDialog("Enter skater's number:"));
@@ -122,10 +130,22 @@ public class SkaterTab extends JPanel {
         skaterList.add(skater);
         JOptionPane.showMessageDialog(null, "\n" + skater.getName()
                 + " has been successfully added!");
-        skaterTableModel.addSkater();
+        skaterTableModel.updateSkater();
         return true;
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the skaters from the loaded file into the table
+    public void addSkaters(List<Skater> skaters) {
+        for (Skater nextSkater : skaters) {
+            skaterList.add(nextSkater);
+            skaterTableModel.updateSkater();
+        }
+    }
+
+    // MODIFIES: this, removeButton
+    // EFFECTS: creates removeButton - when clicked, removeButton will give the user the option to remove a skater from
+    //          the list
     private JButton removeButton() {
         JButton removeButton = new JButton();
         removeButton.setLabel("Remove Skater");
@@ -139,13 +159,16 @@ public class SkaterTab extends JPanel {
         return removeButton;
     }
 
+    // MODIFIES: this
+    // EFFECTS: prompts user for a jersey number. if there is a skater with a matching jersey number,
+    // removes that skater from the list and returns true. else does nothing and returns false.
     private boolean removeSkater() {
         int number = Integer.parseInt(JOptionPane.showInputDialog("\n Which skater would you like to remove?"
                 + " Please give the skater's jersey number: "));
         for (Skater skater : skaterList) {
             if (skater.getNumber() == number) {
                 skaterList.remove(skater);
-                skaterTableModel.removeSkater();
+                skaterTableModel.updateSkater();
                 JOptionPane.showMessageDialog(null, "\n Successfully removed!");
                 return true;
             }
@@ -153,9 +176,5 @@ public class SkaterTab extends JPanel {
         JOptionPane.showMessageDialog(null,"\n Skater with jersey number " + number
                 + " not found.");
         return false;
-    }
-
-    public void setTable(SkaterTableModel model) {
-        this.skaterTableModel = model;
     }
 }

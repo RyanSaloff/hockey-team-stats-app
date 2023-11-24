@@ -55,7 +55,7 @@ public class Skater implements Player, Writable {
         return number;
     }
 
-    // add specification
+    // EFFECTS: generates a JSON representation of the current instance of Skater
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);
