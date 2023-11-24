@@ -43,4 +43,12 @@ public class GoalieTableModel extends AbstractTableModel {
     public String getColumnName(int columnIndex) {
         return columnNames[columnIndex];
     }
+
+    public void addGoalie() {
+        fireTableDataChanged();
+    }
+
+    public void removeGoalie() {
+        fireTableDataChanged();
+    }
 }

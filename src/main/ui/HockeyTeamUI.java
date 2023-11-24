@@ -181,6 +181,7 @@ public class HockeyTeamUI extends JFrame {
         try {
             team = jsonReader.read();
             skaterTab.addSkaters(team.getSkaterList());
+            goalieTab.addGoalies(team.getGoalieList());
             teamName = team.getName();
             setTitle("Hockey Team Roster Program: " + teamName);
             JOptionPane.showMessageDialog(null,

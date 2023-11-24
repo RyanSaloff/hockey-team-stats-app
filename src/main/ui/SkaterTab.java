@@ -29,13 +29,50 @@ public class SkaterTab extends JPanel {
     private void addButtonPanel() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(4,1));
-        buttonPanel.setPreferredSize(new Dimension(120,30));
+        buttonPanel.setPreferredSize(new Dimension(130,30));
 
         buttonPanel.add(skaterImage());
         buttonPanel.add(addButton());
         buttonPanel.add(removeButton());
+        buttonPanel.add(updateButton());
         add(buttonPanel, BorderLayout.WEST);
         setVisible(true);
+    }
+
+    // MODIFIES: this
+    // EFFECTS:
+    private JButton updateButton() {
+        JButton updateButton = new JButton();
+        updateButton.setLabel("Update Skater");
+        updateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int jerseyNumber = Integer.parseInt(JOptionPane.showInputDialog("\n Enter the jersey number of the"
+                        + " skater that you will update: "));
+                updateSkaterHelper(jerseyNumber);
+            }
+        });
+        return updateButton;
+    }
+
+    private void updateSkaterHelper(int jerseyNumber) {
+        for (Skater nextSkater : skaterList) {
+            if (nextSkater.getNumber() == jerseyNumber) {
+                String name = JOptionPane.showInputDialog("Enter skater's name:");
+                int number = Integer.parseInt(JOptionPane.showInputDialog("Enter skater's number:"));
+                int age = Integer.parseInt(JOptionPane.showInputDialog("Enter skater's age:"));
+                String position = JOptionPane.showInputDialog("Enter skater's position:");
+                nextSkater.setName(name);
+                nextSkater.setNumber(number);
+                nextSkater.setAge(age);
+                nextSkater.setPosition(position);
+                skaterTableModel.addSkater();
+                JOptionPane.showMessageDialog(null, name + " has been updated!");
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "Skater with jersey number"
+                + " " + jerseyNumber + " not found.");
     }
 
     private JButton skaterImage() {
@@ -68,7 +105,7 @@ public class SkaterTab extends JPanel {
         String name = JOptionPane.showInputDialog("Enter skater's name:");
         int number = Integer.parseInt(JOptionPane.showInputDialog("Enter skater's number:"));
         int age = Integer.parseInt(JOptionPane.showInputDialog("Enter skater's age:"));
-        String position = JOptionPane.showInputDialog("Enter skater's Position:");
+        String position = JOptionPane.showInputDialog("Enter skater's position:");
         Skater skater = new Skater();
         skater.setName(name);
         skater.setNumber(number);
@@ -113,17 +150,12 @@ public class SkaterTab extends JPanel {
                 return true;
             }
         }
-        JOptionPane.showMessageDialog(null,"\n Skater with number " + number + " not found.");
+        JOptionPane.showMessageDialog(null,"\n Skater with jersey number " + number
+                + " not found.");
         return false;
-    }
-
-    public SkaterTableModel getSkaterTable() {
-        return skaterTableModel;
     }
 
     public void setTable(SkaterTableModel model) {
         this.skaterTableModel = model;
     }
-
-
 }
