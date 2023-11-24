@@ -13,7 +13,6 @@ public class Goalie implements Player, Writable {
 
     // MODIFIES: this
     // EFFECTS: updates the goalie's name
-    @Override
     public void setName(String goalieName) {
         this.name = goalieName;
     }
@@ -21,7 +20,6 @@ public class Goalie implements Player, Writable {
     // REQUIRES: goalieAge >= 0
     // MODIFIES: this
     // EFFECTS: updates the goalie's age
-    @Override
     public void setAge(int goalieAge) {
         this.age = goalieAge;
     }
@@ -29,7 +27,6 @@ public class Goalie implements Player, Writable {
     // REQUIRES: goaliePosition == {"RW", "C", "LW", "D"}
     // MODIFIES: this
     // EFFECTS: updates the goalie's position
-    @Override
     public void setPosition(String goaliePosition) {
         this.position = goaliePosition;
     }
@@ -37,32 +34,27 @@ public class Goalie implements Player, Writable {
     // REQUIRES: 1 <= goalieNumber <= 99
     // MODIFIES: this
     // EFFECTS: updates the player's jersey number
-    @Override
     public void setNumber(int goalieNumber) {
         this.number = goalieNumber;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public int getAge() {
         return age;
     }
 
-    @Override
     public String getPosition() {
         return position;
     }
 
-    @Override
     public int getNumber() {
         return number;
     }
 
-    @Override
+    // add specification
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);

@@ -1,12 +1,18 @@
 package ui;
 
-
 import model.Goalie;
 import model.Skater;
 import model.Team;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import javax.swing.*;
+import javax.swing.table.JTableHeader;
+
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -17,18 +23,90 @@ import java.util.Scanner;
 // I used the AccountNotRobust project to help writing this class (mainly with runHockeyTeam)
 
 // Hockey team roster application
-public class HockeyTeamApp {
+public class HockeyTeamUI extends JFrame {
     private static final String JSON_STORE = "./data/team.json";
+    private static final int WIDTH = 1000;
+    private static final int HEIGHT = 800;
     private Team team;       // reference to a team
+    private String teamName;
     private Scanner input;   // stores user input
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
+    private JTabbedPane tabs;
+    private GoalieTab goalieTab;
+    private SkaterTab skaterTab;
 
     // EFFECTS: runs the hockey team roster application
-    public HockeyTeamApp() {
+    public HockeyTeamUI() {
+        initializeTeam();
+        teamName = team.getName();
+        setTitle("Hockey Team Roster Program: " + teamName);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(WIDTH, HEIGHT);
+
+        this.goalieTab = new GoalieTab(team.getGoalieList(), team.getName());
+        this.skaterTab = new SkaterTab(team.getSkaterList(), team.getName());
+
+        tabs = new JTabbedPane();
+        tabs.add("Goalies", goalieTab);
+        tabs.add("Skaters", skaterTab);
+        add(tabs);
+
+        addLabel();
+        addTeamMenu();
+
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
-        runHockeyTeam();
+
+        setVisible(true);
+    }
+
+    private void addLabel() {
+        JLabel teamNameLabel = new JLabel(teamName);
+        teamNameLabel.setFont(new Font("Arial", Font.BOLD, 20)); // Customize font if needed
+        teamNameLabel.setHorizontalAlignment(JLabel.CENTER);
+    }
+
+    private void addTeamMenu() {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu teamMenu = new JMenu("Team Settings");
+        JMenuItem loadItem = new JMenuItem("Load Team");
+        loadItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loadTeam();
+            }
+        });
+        teamMenu.add(loadItem);
+        JMenuItem saveItem = new JMenuItem("Save Team");
+        saveItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveTeam();
+            }
+        });
+        teamMenu.add(saveItem);
+        JMenuItem editNameItem = new JMenuItem("Edit Team Name");
+        editNameHelper(editNameItem);  // helper method to edit the team name
+        teamMenu.add(editNameItem);
+        menuBar.add(teamMenu);
+        setJMenuBar(menuBar);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: updates team name to user's input
+    private void editNameHelper(JMenuItem editNameItem) {
+        editNameItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String updatedName = JOptionPane.showInputDialog("Enter team's name: ");
+                team.setName(updatedName);
+                teamName = updatedName;
+                setTitle("Hockey Team Roster Program: " + teamName);
+                JOptionPane.showMessageDialog(null, "Team Name has been updated to: " + teamName);
+                repaint();
+            }
+        });
     }
 
     // MODIFIES: this
@@ -102,9 +180,14 @@ public class HockeyTeamApp {
     private void loadTeam() {
         try {
             team = jsonReader.read();
-            System.out.println("Loaded " + team.getName() + " from " + JSON_STORE);
+            skaterTab.addSkaters(team.getSkaterList());
+            teamName = team.getName();
+            setTitle("Hockey Team Roster Program: " + teamName);
+            JOptionPane.showMessageDialog(null,
+                    "Loaded " + team.getName() + " from " + JSON_STORE);
+
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE);
+            JOptionPane.showMessageDialog(null, "Unable to read from file: " + JSON_STORE);
         }
     }
 
@@ -114,7 +197,7 @@ public class HockeyTeamApp {
             jsonWriter.open();
             jsonWriter.write(team);
             jsonWriter.close();
-            System.out.println("Saved " + team.getName() + " to " + JSON_STORE);
+            JOptionPane.showMessageDialog(null,"Saved " + team.getName() + " to " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }

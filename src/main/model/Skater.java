@@ -21,7 +21,6 @@ public class Skater implements Player, Writable {
     // REQUIRES: skaterAge >= 0
     // MODIFIES: this
     // EFFECTS: updates the skater's age
-    @Override
     public void setAge(int skaterAge) {
         this.age = skaterAge;
     }
@@ -29,7 +28,6 @@ public class Skater implements Player, Writable {
     // REQUIRES: skaterPosition == "RW", "C", "LW", "D"
     // MODIFIES: this
     // EFFECTS: updates the skater's position
-    @Override
     public void setPosition(String skaterPosition) {
         this.position = skaterPosition;
     }
@@ -37,32 +35,27 @@ public class Skater implements Player, Writable {
     // REQUIRES: 1 <= skaterNumber <= 99
     // MODIFIES: this
     // EFFECTS: updates the skater's jersey number
-    @Override
     public void setNumber(int skaterNumber) {
         this.number = skaterNumber;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public int getAge() {
         return age;
     }
 
-    @Override
     public String getPosition() {
         return position;
     }
 
-    @Override
     public int getNumber() {
         return number;
     }
 
-    @Override
+    // add specification
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);
