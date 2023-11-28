@@ -128,3 +128,67 @@ This image shows the Skaters tab when three skaters have been added.
 ![img_2.png](img_2.png)
 
 This image shows the drop-down menu and the top left of the application.
+
+## Phase 4 Update
+### Phase 4: Task 2
+
+Tue Nov 28 12:24:21 PST 2023
+Set goalie's name to Jacob Markstrom
+
+Tue Nov 28 12:24:21 PST 2023
+Set goalie's number to 25
+
+Tue Nov 28 12:24:21 PST 2023
+Set goalie's age to 33
+
+Tue Nov 28 12:24:21 PST 2023
+Set goalie's position to G
+
+Tue Nov 28 12:24:21 PST 2023
+Added Jacob Markstrom to the Calgary Flames
+
+Tue Nov 28 12:24:38 PST 2023
+Set goalie's name to Jacob Markstrom
+
+Tue Nov 28 12:24:38 PST 2023
+Set goalie's number to 25
+
+Tue Nov 28 12:24:38 PST 2023
+Set goalie's age to 34
+
+Tue Nov 28 12:24:38 PST 2023
+Set goalie's position to G
+
+Tue Nov 28 12:24:53 PST 2023
+Set skater's name to Sidney Crosby
+
+Tue Nov 28 12:24:53 PST 2023
+Set skater's number to 87
+
+Tue Nov 28 12:24:53 PST 2023
+Set skater's age to 36
+
+Tue Nov 28 12:24:53 PST 2023
+Set skater's position to C
+
+Tue Nov 28 12:24:53 PST 2023
+Added Sidney Crosby  to the Calgary Flames
+
+Tue Nov 28 12:25:03 PST 2023
+Removed Jacob Markstrom from the Calgary Flames
+
+Tue Nov 28 12:25:14 PST 2023
+Set team name to the Boston Bruins
+
+
+Process finished with exit code 0
+
+#### Event Log Description
+In this sample of event I completed the following steps (in order):
+- I added Jacob Markstrom to the list of goalies on the Calgary Flames
+- I updated Jacob Markstrom's age to 34
+- I added Sidney Crosby to the list of skaters on the Calgary Flames
+- I removed Jacob Markstrom from the Calgary Flames
+- I set the team name to the Boston Bruins
+- I closed the application
+
