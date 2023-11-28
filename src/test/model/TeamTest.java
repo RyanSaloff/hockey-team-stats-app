@@ -253,8 +253,19 @@ public class TeamTest {
 
     }
 
+    // Tests that the hashcode is not equal for two different teams
+    @Test
+    void testHashCode() {
+        Team testTeamTwo = new Team("Edmonton Oilers");
+        assertFalse(testTeam.hashCode() == testTeamTwo.hashCode());
+    }
 
-
+    // Tests that the equals method on objects of different classes
+    @Test
+    void testEquals() {
+        assertFalse(testTeam.equals(null));
+        assertFalse(testSkaterA.equals(testGoalieA));
+    }
 
 
 }
