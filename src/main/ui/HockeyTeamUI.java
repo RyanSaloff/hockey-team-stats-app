@@ -1,13 +1,14 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.Team;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
@@ -18,7 +19,7 @@ import java.util.Scanner;
 // Phase 3 Update: I used the AlarmSystem project to help with writing the GUI
 
 // Hockey team roster application
-public class HockeyTeamUI extends JFrame {
+public class HockeyTeamUI extends JFrame implements LogPrinter {
     private static final String JSON_STORE = "./data/team.json";
     private static final int WIDTH = 1000;
     private static final int HEIGHT = 800;
@@ -27,7 +28,6 @@ public class HockeyTeamUI extends JFrame {
     private Scanner input;   // stores user input
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    private JTabbedPane tabs;
     private GoalieTab goalieTab;
     private SkaterTab skaterTab;
 
@@ -39,10 +39,18 @@ public class HockeyTeamUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
 
-        this.goalieTab = new GoalieTab(team.getGoalieList());
-        this.skaterTab = new SkaterTab(team.getSkaterList());
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                printLog(EventLog.getInstance());
+            }
+        });
 
-        tabs = new JTabbedPane();
+        this.goalieTab = new GoalieTab(team);
+        this.skaterTab = new SkaterTab(team);
+
+        JTabbedPane tabs = new JTabbedPane();
         tabs.add("Goalies", goalieTab);
         tabs.add("Skaters", skaterTab);
         add(tabs);
@@ -53,6 +61,15 @@ public class HockeyTeamUI extends JFrame {
         jsonReader = new JsonReader(JSON_STORE);
 
         setVisible(true);
+    }
+
+    @Override
+    public void printLog(EventLog eventLog) {
+        for (Event next : eventLog) {
+            System.out.println(next.getDate());
+            System.out.println(next.getDescription());
+            System.out.println();
+        }
     }
 
     // MODIFIES: this

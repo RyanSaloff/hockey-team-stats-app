@@ -1,6 +1,7 @@
 package ui;
 
 import model.Goalie;
+import model.Team;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,12 +12,14 @@ import java.util.List;
 // Represents a tab that contains a team's goalie panel. The goalie tab has one TableModel that is added to the centre
 // of the screen.
 public class GoalieTab extends JPanel {
-    List<Goalie> goalieList;
-    GoalieTableModel goalieTableModel;
+    private Team team;
+    private List<Goalie> goalieList;
+    private GoalieTableModel goalieTableModel;
 
     // EFFECTS: adds the button panel and table to the tab. passes goalieList to the TableModel as the data
-    public GoalieTab(List<Goalie> goalieList) {
-        this.goalieList = goalieList;
+    public GoalieTab(Team team) {
+        this.team = team;
+        this.goalieList = team.getGoalieList();
         this.goalieTableModel = new GoalieTableModel(goalieList);
 
         setLayout(new BorderLayout());
@@ -89,18 +92,15 @@ public class GoalieTab extends JPanel {
         goalie.setAge(age);
         goalie.setPosition(position);
 
-        for (Goalie nextGoalie : goalieList) {
-            if (nextGoalie == goalie || nextGoalie.getNumber() == goalie.getNumber()) {
-                JOptionPane.showMessageDialog(null, "Player has already been added."
-                        + " Try updating the player instead.");
-                return false;
-            }
+        if (team.addGoalie(goalie)) {
+            JOptionPane.showMessageDialog(null, "\n" + goalie.getName()
+                    + " has been successfully added!");
+            goalieTableModel.updateGoalie();
+            return true;
         }
-        goalieList.add(goalie);
-        JOptionPane.showMessageDialog(null, "\n" + goalie.getName()
-                + " has been successfully added!");
-        goalieTableModel.updateGoalie();
-        return true;
+        JOptionPane.showMessageDialog(null, "Player has already been added."
+                + " Try updating the player instead.");
+        return false;
     }
 
     // MODIFIES: this, removeButton
@@ -125,13 +125,11 @@ public class GoalieTab extends JPanel {
     private boolean removeGoalie() {
         int number = Integer.parseInt(JOptionPane.showInputDialog("\n Which goalie would you like to remove?"
                 + " Please give the goalie's jersey number: "));
-        for (Goalie goalie : goalieList) {
-            if (goalie.getNumber() == number) {
-                goalieList.remove(goalie);
-                goalieTableModel.updateGoalie();
-                JOptionPane.showMessageDialog(null, "\n Successfully removed!");
-                return true;
-            }
+        if (team.removeGoalie(number)) {
+
+            JOptionPane.showMessageDialog(null, "\n Successfully removed!");
+            goalieTableModel.updateGoalie();
+            return true;
         }
         JOptionPane.showMessageDialog(null,"\n Goalie with jersey number " + number
                 + " not found.");

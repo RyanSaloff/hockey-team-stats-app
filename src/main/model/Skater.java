@@ -16,6 +16,7 @@ public class Skater implements Player, Writable {
     @Override
     public void setName(String skaterName) {
         this.name = skaterName;
+        EventLog.getInstance().logEvent(new Event("Set skater's name to " + name));
     }
 
     // REQUIRES: skaterAge >= 0
@@ -23,6 +24,7 @@ public class Skater implements Player, Writable {
     // EFFECTS: updates the skater's age
     public void setAge(int skaterAge) {
         this.age = skaterAge;
+        EventLog.getInstance().logEvent(new Event("Set skater's age to " + age));
     }
 
     // REQUIRES: skaterPosition == "RW", "C", "LW", "D"
@@ -30,6 +32,7 @@ public class Skater implements Player, Writable {
     // EFFECTS: updates the skater's position
     public void setPosition(String skaterPosition) {
         this.position = skaterPosition;
+        EventLog.getInstance().logEvent(new Event("Set skater's position to " + position));
     }
 
     // REQUIRES: 1 <= skaterNumber <= 99
@@ -37,6 +40,7 @@ public class Skater implements Player, Writable {
     // EFFECTS: updates the skater's jersey number
     public void setNumber(int skaterNumber) {
         this.number = skaterNumber;
+        EventLog.getInstance().logEvent(new Event("Set skater's number to " + number));
     }
 
     public String getName() {

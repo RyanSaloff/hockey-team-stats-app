@@ -15,6 +15,7 @@ public class Goalie implements Player, Writable {
     // EFFECTS: updates the goalie's name
     public void setName(String goalieName) {
         this.name = goalieName;
+        EventLog.getInstance().logEvent(new Event("Set goalie's name to " + name));
     }
 
     // REQUIRES: goalieAge >= 0
@@ -22,6 +23,7 @@ public class Goalie implements Player, Writable {
     // EFFECTS: updates the goalie's age
     public void setAge(int goalieAge) {
         this.age = goalieAge;
+        EventLog.getInstance().logEvent(new Event("Set goalie's age to " + age));
     }
 
     // REQUIRES: goaliePosition == {"RW", "C", "LW", "D"}
@@ -29,6 +31,7 @@ public class Goalie implements Player, Writable {
     // EFFECTS: updates the goalie's position
     public void setPosition(String goaliePosition) {
         this.position = goaliePosition;
+        EventLog.getInstance().logEvent(new Event("Set goalie's position to " + position));
     }
 
     // REQUIRES: 1 <= goalieNumber <= 99
@@ -36,6 +39,7 @@ public class Goalie implements Player, Writable {
     // EFFECTS: updates the player's jersey number
     public void setNumber(int goalieNumber) {
         this.number = goalieNumber;
+        EventLog.getInstance().logEvent(new Event("Set goalie's number to " + number));
     }
 
     public String getName() {

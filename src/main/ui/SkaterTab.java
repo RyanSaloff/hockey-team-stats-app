@@ -1,6 +1,7 @@
 package ui;
 
 import model.Skater;
+import model.Team;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,12 +12,14 @@ import java.util.List;
 // Represents a tab that contains a team's skater panel. The skater tab has one TableModel that is added to the centre
 // of the screen.
 public class SkaterTab extends JPanel {
-    List<Skater> skaterList;
-    SkaterTableModel skaterTableModel;
+    private Team team;
+    private List<Skater> skaterList;
+    private SkaterTableModel skaterTableModel;
 
     // EFFECTS: adds the button panel and table to the tab. passes skaterList to the TableModel as the data
-    public SkaterTab(List<Skater> skaterList) {
-        this.skaterList = skaterList;
+    public SkaterTab(Team team) {
+        this.team = team;
+        this.skaterList = team.getSkaterList();
         this.skaterTableModel = new SkaterTableModel(skaterList);
 
         setLayout(new BorderLayout());
@@ -120,18 +123,15 @@ public class SkaterTab extends JPanel {
         skater.setAge(age);
         skater.setPosition(position);
 
-        for (Skater nextSkater : skaterList) {
-            if (nextSkater == skater || nextSkater.getNumber() == skater.getNumber()) {
-                JOptionPane.showMessageDialog(null, "Player has already been added."
-                        + " Try updating the player instead.");
-                return false;
-            }
+        if (team.addSkater(skater)) {
+            JOptionPane.showMessageDialog(null, "\n" + skater.getName()
+                    + " has been successfully added!");
+            skaterTableModel.updateSkater();
+            return true;
         }
-        skaterList.add(skater);
-        JOptionPane.showMessageDialog(null, "\n" + skater.getName()
-                + " has been successfully added!");
-        skaterTableModel.updateSkater();
-        return true;
+        JOptionPane.showMessageDialog(null, "Player has already been added."
+                + " Try updating the player instead.");
+        return false;
     }
 
     // MODIFIES: this
@@ -165,13 +165,10 @@ public class SkaterTab extends JPanel {
     private boolean removeSkater() {
         int number = Integer.parseInt(JOptionPane.showInputDialog("\n Which skater would you like to remove?"
                 + " Please give the skater's jersey number: "));
-        for (Skater skater : skaterList) {
-            if (skater.getNumber() == number) {
-                skaterList.remove(skater);
-                skaterTableModel.updateSkater();
-                JOptionPane.showMessageDialog(null, "\n Successfully removed!");
-                return true;
-            }
+        if (team.removeSkater(number)) {
+            skaterTableModel.updateSkater();
+            JOptionPane.showMessageDialog(null, "\n Successfully removed!");
+            return true;
         }
         JOptionPane.showMessageDialog(null,"\n Skater with jersey number " + number
                 + " not found.");

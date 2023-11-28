@@ -6,7 +6,6 @@ import persistence.Writable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 // Represents a hockey team with a list of Players, list of Goalies, and a team name
 public class Team implements Writable {
@@ -27,8 +26,11 @@ public class Team implements Writable {
         this.players = 0;
     }
 
+    // MODIFIES: this
+    // EFFECTS: changes the team's name to teamName
     public void setName(String teamName) {
         this.name = teamName;
+        EventLog.getInstance().logEvent(new Event("Set team name to the " + teamName));
     }
 
     public String getName() {
@@ -46,6 +48,7 @@ public class Team implements Writable {
         }
         goalieList.add(goalie);
         this.goalies++;
+        EventLog.getInstance().logEvent(new Event("Added " + goalie.getName() + " to the " + name));
         return true;
     }
 
@@ -68,6 +71,7 @@ public class Team implements Writable {
         }
         skaterList.add(skater);
         this.skaters++;
+        EventLog.getInstance().logEvent(new Event("Added " + skater.getName() + " to the " + name));
         return true;
     }
 
@@ -96,6 +100,8 @@ public class Team implements Writable {
             if (goalie.getNumber() == jerseyNumber) {
                 goalieList.remove(goalie);
                 this.goalies--;
+                EventLog.getInstance().logEvent(new Event("Removed " + goalie.getName()
+                        + " from the " + name));
                 return true;
             }
         }
@@ -111,6 +117,8 @@ public class Team implements Writable {
             if (skater.getNumber() == jerseyNumber) {
                 skaterList.remove(skater);
                 this.skaters--;
+                EventLog.getInstance().logEvent(new Event("Removed " + skater.getName()
+                        + " from the " + name));
                 return true;
             }
         }
