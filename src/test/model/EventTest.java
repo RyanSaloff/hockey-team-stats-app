@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Calendar;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+
 public class EventTest {
     private Event e;
     private Date d;
@@ -32,5 +33,19 @@ public class EventTest {
     @Test
     public void testToString() {
         assertEquals(d.toString() + "\n" + "Skater added to the Calgary Flames", e.toString());
+    }
+
+    // Tests that the hashcode is not equal for two different events
+    @Test
+    public void testDifferentHashCode() {
+        Event testEventThree = new Event("Goalie added to the Calgary Flames");
+        assertTrue(e.hashCode() != testEventThree.hashCode());
+    }
+
+    // Tests that objects of different classes are not equal
+    @Test
+    public void testNotEquals() {
+        assertFalse(e.equals(d));
+        assertFalse(e.equals(null));
     }
 }
