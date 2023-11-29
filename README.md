@@ -192,3 +192,6 @@ In this sample of event I completed the following steps (in order):
 - I set the team name to the Boston Bruins
 - I closed the application
 
+### Phase 4: Task 3
+Reflecting upon the design in my UML diagram, I observed both strengths and weaknesses in my design. For instance, creating the Player interface helped to effectively achieve abstraction between the Skater and Goalie classes, since they share many of the same methods. However, I also observed that the coupling can be improved in my design. In particular, both of the Skater and Goalie classes have three associations that provide a list to another class. With more time, my application design would be improved by refactoring the SkaterTab/GoalieTab classes to eliminate the direct association with the Skater/Goalie classes and instead, SkaterTableModel/GoalieTableModel classes would be used to get the list of Skaters/Goalies. By making this change to reduce the coupling in my application, making further modifications and adding more features to my application would become much easier.
+

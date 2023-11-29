@@ -26,6 +26,7 @@ public class EventLogTest {
         el.logEvent(e3);
     }
 
+    // Tests that each event has been added to the event log
     @Test
     public void testLogEvent() {
         List<Event> l = new ArrayList<>();
@@ -40,6 +41,7 @@ public class EventLogTest {
         assertTrue(l.contains(e3));
     }
 
+    // Tests that a call to clear event log can be made
     @Test
     public void testClear() {
         EventLog el = EventLog.getInstance();
