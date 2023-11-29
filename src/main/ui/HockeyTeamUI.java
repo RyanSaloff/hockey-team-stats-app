@@ -25,13 +25,12 @@ public class HockeyTeamUI extends JFrame implements LogPrinter {
     private static final int HEIGHT = 800;
     private Team team;       // reference to a team
     private String teamName;
-    private Scanner input;   // stores user input
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
     private GoalieTab goalieTab;
     private SkaterTab skaterTab;
 
-    // EFFECTS: runs the hockey team roster application and adds the
+    // EFFECTS: runs the hockey team roster application and adds the menu + tabs
     public HockeyTeamUI() {
         initializeTeam();
         teamName = team.getName();
@@ -120,8 +119,6 @@ public class HockeyTeamUI extends JFrame implements LogPrinter {
     // EFFECTS: initializes team
     private void initializeTeam() {
         team = new Team("Calgary Flames");
-        input = new Scanner(System.in);
-        input.useDelimiter("\n");
     }
 
     // MODIFIES: this
